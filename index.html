@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+      <script src="action.php"></script> 
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="components.css?version=51">
+      <!-- <script src="access.js"></script> -->
+      
+      <script>
+         function Ajax() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                //setTimeout('Ajax()', 100);
+                //document.getElementById("demo").innerHTML="ciao";
+               //document.getElementById("demo").innerHTML=xmlhttp.responseText;
+                //var array = new Array();
+                var docenti = xmlhttp.responseText;
+                //document.getElementById("demo").innerHTML=xmlhttp.responseText;
+                //var aule = '[{"a":"1","d":"SI"},{"b":"2","d":"NO"}]';
+                //var aule = "'"+"["+res+"]"+"'";
+                
+                //document.getElementById("demo").innerHTML=aule;
+                var obj = JSON.parse(docenti);
+                //document.getElementById("demo").innerHTML=obj[1].d;
+                
+                // algorythm from DB selection
+                
+                for(var i = 1; i < 9; i++) {
+                  if((document.getElementById('user').value == obj[i-1].no) && (document.getElementById('pass').value == obj[i-1].co) && (document.getElementById('mat').value == obj[i-1].ma)) {
+                    location.href = "ex.html";
+                    break;
+                  } else if((i >= 8) && ((document.getElementById('user').value != obj[i-1].no) || (document.getElementById('user').value != obj[i-1].co) || (document.getElementById('user').value != obj[i-1].ma))){ 
+                    alert("Docente non registrato");
+                  }
+                }
+            }
+        }
+        xmlhttp.open("GET","action.php",true); //Change file.php to the location of your php file
+        xmlhttp.send();
+        }/*
+        window.onload=function(){
+	      setTimeout('Ajax()', 100);
+        }*/
+      </script>
+      
+     <!-- <script>
+        $('#aform').submit(function() {
+          var post_data = $('#aform').serialize();
+          $.post('action.php', post_data, function(data) {
+            $('#notification').show();
+          });
+        });    
+      </script> -->
+      <!-- <script>
+      $('#submit').click(function()
+{
+    $.ajax({
+        url: action.php,
+        type:'POST',
+        data:
+        {
+            user: user,
+            pass: pass
+        },
+        success: function(msg)
+        {
+            alert('Sent');
+        }               
+    });
+}); 
+     </script>
+    -->  
+  </head>
+
+  <body>
+    <div class="flex-container">
+    <header>
+      <h1 class="shadetext"> Parthenope: Class Service </h1>
+    </header>
+    <!--
+    <nav class="flex-container">
+      <h1 class="text"> Registrazione </h1>
+    </nav>
+    -->
+    <!-- <nav class="nav"></nav> -->
+      
+    <article class="article">
+    <nav class="mainav">
+     <h1 class="text"> Accesso docenti </h1>
+     <p class="blueline"></p>
+        
+     <iframe name="hide" style="display:none;"></iframe>
+     <form action="action.php" method="post" target="hide" id="aform" class="access">
+         
+       <p><b>Nome </b> <input class="startbox" type="text" name="user" id="user" value=""/></p>
+       <p><b>Cognome </b> <input class="startbox" type="text" name="pass" id="pass" value="" /></p>
+       <p><b>Matricola </b> <input class="startbox" type="text" name="mat" id="mat" value="" /></p>
+       <p><input type="hidden" name="action" id="action" value="subscribe" /></p>
+         
+       <p><input type="submit" value="Accedi" id="submit" name="submit" class="button sky" onclick="Ajax()"/></p>
+       
+       <!-- <p> <button type="submit" form="aform" id="submit" name="submit" value="submit" onclick="location.href = 'http://localhost/WEBAPPS/ex.html';" class="button blue" >Go</button></p> -->
+           
+     </form> 
+    </nav>
+        
+    <nav class="mainav2">
+     <h1 class="text"> Accesso ospite </h1>
+     <p class="redline"></p>
+    
+     <form action="ex.html" method="GET">
+         <p><input type="hidden" id="entry" name="entry" value="entry"/></p>
+         <p><input type="submit" value="Entra" name="guest" id="guest" class="button rose" onclick=""></p>
+     </form>
+        
+       <!-- <p> <button type="submit" form="aform" id="submit" name="submit" value="submit" onclick="location.href = 'http://localhost/WEBAPPS/ex.html';" class="button blue" >Go</button></p> -->
+     </form> 
+    </nav>
+        <!--
+        <aside>
+           <img src="universita.jpg">
+        </aside>
+     <!-- <p id="notification"> Thank You </p> -->
+        -->
+   </article>
+      <!--<p id="demo" style="color: white;"> Here </p> 
+      <p id="dome" style="color: white;"> Here2 </p>-->
+   <footer> Copyright &copy; Vladislav and Daniela: students of Parthenope </footer>
+   </div>
+      
+  </body>
+</html>

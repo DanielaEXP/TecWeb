@@ -1,0 +1,416 @@
+<!doctype html>
+<html>
+  <head>
+      <script src="color.php"></script> 
+      <link rel="import" href="index.html">
+      <!--<script src="core.php"></script>-->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+      
+      <link rel="stylesheet" type="text/css" href="components.css?version=51">
+      <!-- <script src="trasmission.js"></script> -->
+      
+      <script>
+        function process() {
+          var parameters = location.search.substring(1).split("&");
+          var temp = parameters[0].split("=");
+    
+          l = unescape(temp[1]);
+          
+          if(temp[1] === "entry") {
+            $(document).ready(function() {
+              $('#change').hide();
+            });
+          }
+        }
+        process();
+      </script>
+      
+      <script>
+        function changeImage(a) {
+          document.getElementById("img").src=a;
+        }
+      </script>
+      
+      <script>
+         function Ajax() {
+            var xmlhttp=new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                setTimeout('Ajax()', 100);
+                //document.getElementById("demo").innerHTML="ciao";
+               //document.getElementById("demo").innerHTML=xmlhttp.responseText;
+                //var array = new Array();
+                var aule = xmlhttp.responseText;
+                //document.getElementById("demo").innerHTML=xmlhttp.responseText;
+                //var aule = '[{"a":"1","d":"SI"},{"b":"2","d":"NO"}]';
+                //var aule = "'"+"["+res+"]"+"'";
+                
+                //document.getElementById("demo").innerHTML=aule;
+                var obj = JSON.parse(aule);
+                //document.getElementById("demo").innerHTML=obj[1].d;
+                
+                // algorythm from DB selection
+                  
+                for(var i = 1; i < 23; i++) {
+                    var tmp = ".aula" + i; 
+                    if((obj[i-1].di == "SI")) {
+                        $(tmp).css("background-color","green");
+                    } else if((obj[i-1].di == "NO")) {
+                        $(tmp).css("background-color","red");
+                    }
+                    
+                    /*var div = document.createElement("Div");
+                    div.innerHTML= "ciao";
+                    document.body.appendChild(div);*/
+                    
+                    //$(document).ready(function() {
+                      $('.aula' + i).click({id: i}, function(e) {
+                          $('.options').fadeIn(500); 
+                          //var $x = (e.data.id);
+                          document.getElementById('classroom').value=(e.data.id);
+                           //alert(e.data.id);
+                          //document.getElementById('info1').innerHTML=obj[i].au;
+                          $('#info1').text(obj[(e.data.id)-1].au);
+                          $('#info2').text(obj[(e.data.id)-1].le);
+                          $('#info3').text(obj[(e.data.id)-1].do);
+                          $('#info4').text(obj[(e.data.id)-1].or);
+                          $('#info5').text(obj[(e.data.id)-1].po);
+                          $('#info6').text(obj[(e.data.id)-1].di);
+                          $('#info7').text(obj[(e.data.id)-1].pi);
+                      });
+                    //});
+                }
+            } 
+        }
+        xmlhttp.open("GET","color.php",true); //Change file.php to the location of your php file
+        xmlhttp.send();
+        }
+        window.onload=function(){
+	      setTimeout('Ajax()', 100);
+        }
+      </script>
+      
+      <script>
+        function map0() {
+          $('.plant0').show();
+          $('.plant1').hide();
+          $('.plant2').hide();
+          $('.plant3').hide();
+          $('.plant4').hide();
+          $('.plant5').hide();
+          $('.plant6').hide();
+        }
+        function map1() {
+          $('.plant1').show();    
+          $('.plant0').hide();
+          $('.plant2').hide();
+          $('.plant3').hide();
+          $('.plant4').hide();
+          $('.plant5').hide();
+          $('.plant6').hide();
+        }
+        function map2() {
+          $('.plant2').show();    
+          $('.plant0').hide();
+          $('.plant1').hide();
+          $('.plant3').hide();
+          $('.plant4').hide();
+          $('.plant5').hide();
+          $('.plant6').hide();
+        }
+        function map3() {
+          $('.plant3').show();    
+          $('.plant0').hide();
+          $('.plant1').hide();
+          $('.plant2').hide();
+          $('.plant4').hide();
+          $('.plant5').hide();
+          $('.plant6').hide();
+        }
+        function map4() {
+          $('.plant4').show();    
+          $('.plant0').hide();
+          $('.plant1').hide();
+          $('.plant2').hide();
+          $('.plant3').hide();
+          $('.plant5').hide();
+          $('.plant6').hide();
+        }
+        function map5() {
+          $('.plant5').show();    
+          $('.plant0').hide();
+          $('.plant1').hide();
+          $('.plant2').hide();
+          $('.plant3').hide();
+          $('.plant4').hide();
+          $('.plant6').hide();
+        }
+        function map6() {
+          $('.plant6').show();    
+          $('.plant0').hide();
+          $('.plant1').hide();
+          $('.plant2').hide();
+          $('.plant3').hide();
+          $('.plant4').hide();
+          $('.plant5').hide();
+        }
+      </script>
+    
+      <script>
+        function popup() {
+          $('.settings').show();  
+        }
+        function down() {
+          $('.options').toggle();  
+        }
+      </script>
+      
+      <script>
+        function popdown() {
+          $('.settings').toggle();  
+        }
+      </script>
+      
+      <script>
+        function return_main() {
+          location.href = "index.html";  
+        }
+      </script>
+ <!--      
+      <script>
+          $(document).ready(function() {
+            $('.aula6').click(function(event) {
+              $('.options').fadeIn(500); 
+            });
+          });
+      </script>
+ -->   
+        <!-- <script type="text/javascript">
+
+            $(document).ready(function() {
+                $('.box.nord.front').click(function(event) {
+                  //$(this).css('background-color', '#000000');
+                  this.style.backgroundColor = this.style.backgroundColor == 'darkred' ? 'darkgreen'  : 'darkred';
+                });
+                $('.box.nord.small').click(function(event) {
+                  //$(this).css('background-color', '#000000');
+                  this.style.backgroundColor = this.style.backgroundColor == 'darkred' ? 'darkgreen'  : 'darkred';
+                });
+                $('.box.nord.big').click(function(event) {
+                  //$(this).css('background-color', '#000000');
+                  this.style.backgroundColor = this.style.backgroundColor == 'darkred' ? 'darkgreen'  : 'darkred';
+                });
+                $('.box.sud.front').click(function(event) {
+                  //$(this).css('background-color', '#000000');
+                  this.style.backgroundColor = this.style.backgroundColor == 'darkred' ? 'darkgreen'  : 'darkred';
+                });
+                $('.box.sud.small').click(function(event) {
+                  //$(this).css('background-color', '#000000');
+                  this.style.backgroundColor = this.style.backgroundColor == 'darkred' ? 'darkgreen'  : 'darkred';
+                });
+                $('.box.sud.big').click(function(event) {
+                  //$(this).css('background-color', '#000000');
+                  this.style.backgroundColor = this.style.backgroundColor == 'darkred' ? 'darkgreen'  : 'darkred';
+                });
+            }); 
+
+        </script> -->
+      
+    <!--  <script>
+      var statusIntervalId = window.setInterval(update, 1000);
+
+function update() {
+    $.ajax({
+        url: 'ex.php',
+        dataType: 'text',
+        success: function(data) {
+            if (parseInt(data) == 0) {
+                $("#status").css({ color: "red" }).text("offline");
+                $('.box.nord.front').toggle();
+                echo "ok";
+            } else {
+                $("#status").css({ color: "green" }).text("online");
+                $('.box.sud.front').toggle();
+                echo "ko";
+            }
+        }
+    }
+}
+      </script>
+      -->
+  </head>
+
+  <body>
+    <div class="flex-container">
+    <header>
+      <h1 class="shadetext"> Parthenope University: Class Service </h1>
+    </header>
+    
+    <nav class="nav">
+    <ul>
+        <li class="plan blue" onclick='map0();'>Piano 0</li>
+        <li class="plan blue" onclick='map1();'>Piano 1</li>  
+        <li class="plan blue" onclick='map2();'>Piano 2</li>  
+        <li class="plan blue" onclick='map3();'>Piano 3</li>  
+        <li class="plan blue" onclick='map4();'>Piano 4</li>  
+        <li class="plan blue" onclick='map5();'>Piano 5</li>
+        <li class="plan blue" onclick='map6();'>Piano 6</li>
+        <li class="plan red" onclick="return_main();">Esci</li>
+    </ul>
+    </nav>
+      
+    <article id="article" class="article">
+        
+        <div class="plant0">
+        <!-- <img id="img" src="fox.png"> -->
+        <!--<div class="blank3"></div>
+        <div class="blank2"></div>
+        <div class="blank1"></div>
+        <div class="blank2"></div>
+        <div class="blank3"></div>
+        <br>
+        <div class="blank6"></div>
+        <div class="blank5"></div>
+        <div class="blank4"></div>
+        <div class="blank5"></div>
+        <div class="blank6"></div>-->
+        </div>
+        
+        <div class="plant1" style="display: none;">
+        <!-- <img id="img" src="fox.png"> -->
+        <div class="aula3"><p class="littlebig"> 3 </p></div>
+        <div class="aula2"><p class="littlebig"> 2 </p></div>
+        <div class="aula1"><p class="big"> 1 </p></div>
+                
+        <div class="aula4"><p class="lateral"> 4 </p></div>
+        <div class="aula5"><p class="near"> 5 </p></div>
+        <div class="aula6"><p class="front"> 6 </p></div>
+        <div class="aula7"><p class="near"> 7 </p></div>
+        <div class="aula8"><p class="lateral"> 8 </p></div>
+        </div>
+        
+        <div class="plant2" style="display: none;">
+        <!-- <img id="img" src="fox.png"> -->
+        <div class="aula20"><p class="lab"> L2 </p></div>
+        <div class="aula19"><p class="lab"> L1 </p></div>
+        <div class="aula9"><p class="front"> 9 </p></div>
+        <div class="aula10"><p class="near"> 10 </p></div>
+        <div class="aula11"><p class="lateral"> 11 </p></div>
+        <br>
+        <div class="aula14"><p class="lateral"> 14 </p></div>
+        <div class="aula13"><p class="near"> 13 </p></div>
+        <div class="aula12"><p class="front"> 12 </p></div>
+        <div class="aula21"><p class="lab"> L3 </p></div>
+        <div class="aula22"><p class="lab"> L4 </p></div>
+        </div>
+        
+        <div class="plant3" style="display: none;">
+        <!-- <img id="img" src="fox.png"> -->
+        <div class="blank3"></div>
+        <div class="blank2"></div>
+        <div class="blank1"></div>
+        <div class="aula15"><p class="near"> 15 </p></div>
+        <div class="aula16"><p class="lateral"> 16 </p></div>
+        <br>
+        <div class="aula18"><p class="lateral"> 18 </p></div>
+        <div class="aula17"><p class="near"> 17 </p></div>
+        <div class="blank4"></div>
+        <div class="blank5"></div>
+        <div class="blank6"></div>
+        </div>
+        
+        <div class="plant4" style="display: none;">
+        <!-- <img id="img" src="fox.png"> -->
+        <!--<div class="blank3"></div>
+        <div class="blank2"></div>
+        <div class="blank1"></div>
+        <div class="blank2"></div>
+        <div class="blank3"></div>
+        <br>
+        <div class="blank6"></div>
+        <div class="blank5"></div>
+        <div class="blank4"></div>
+        <div class="blank5"></div>
+        <div class="blank6"></div>-->
+        </div>
+        
+        <div class="plant5" style="display: none;">
+          <!--<div class="blank3"></div>
+          <div class="blank2"></div>
+          <div class="blank1"></div>
+          <div class="blank2"></div>
+          <div class="blank3"></div>
+          <br>
+          <div class="blank6"></div>
+          <div class="blank5"></div>
+          <div class="blank4"></div>
+          <div class="blank5"></div>
+          <div class="blank6"></div>-->
+        </div>
+        
+        <div class="plant6" style="display: none;">
+          <!--<div class="blank3"></div>
+          <div class="blank2"></div>
+          <div class="blank1"></div>
+          <div class="blank2"></div>
+          <div class="blank3"></div>
+          <br>
+          <div class="blank6"></div>
+          <div class="blank5"></div>
+          <div class="blank4"></div>
+          <div class="blank5"></div>
+          <div class="blank6"></div>-->
+        </div>
+        
+        <div class="options" style="display:none;">
+         <div class="border">
+          <p> <button type="button" id="back" name="back" value="back" class="buttonback" onclick="down()"> X </button></p>     
+             
+          <p class="informations"> Aula : <p id="info1" class="textinfo"> </p></p>
+          <p class="informations"> Lezione : <p id="info2" class="textinfo"> </p></p>
+          <p class="informations"> Docente : <p id="info3" class="textinfo"> </p></p>
+          <p class="informations"> Orario : <p id="info4" class="textinfo"> </p></p>
+          <p class="informations"> Posti : <p id="info5" class="textinfo"> </p></p>
+          <p class="informations"> Disponibilita' : <p id="info6" class="textinfo"> </p></p>
+          <p class="informations"> Piano : <p id="info7" class="textinfo"> </p></p>
+                  
+         <!-- input has to change into button -->
+         <p> <button type="button" id="change" name="change" value="change" class="buttongo" onclick="popup()"> Modifica </button> </p>
+         </div>
+        </div>
+        
+        <div class="settings" style="display:none;">
+          <iframe name="hide" style="display:none;"></iframe>
+          <form action="core.php" method="post" target="hide" id="aform">
+          <div class="space">
+          <p> <button type="button" id="back2" name="back2" value="back2" class="buttonback2" onclick="popdown()"> X </button></p>
+              
+          <p><b> Lezione :</b> <input class="openbox" type="text" name="lezi" id="lezi" value=""/></p>
+          <p><b> Docente :</b> <input class="openbox" type="text" name="doce" id="doce" value="" /></p>
+          <p><b> Orario :</b> <input class="openbox" type="text" name="orar" id="orar" value="" /></p>
+          <p><b> Disponibilita' :</b> <input class="openbox" type="text" name="dispon" id="dispon" value="" /></p>
+          <p><input type="hidden" name="classroom" id="classroom"/></p>
+          <br>
+          <p><input type="submit" value="Applica" id="apply" name="apply" class="buttonok" onclick="popdown()"></p>
+          </div>
+          </form>
+        </div>
+     </article>
+   </div>
+   <!-- <iframe name="hide" style="display:none;"></iframe>
+   <form action="ex.php" method="post" target="hide">
+       <p><b>Aula :</b> <input type="text" name="aul" id="aul" value=""/></p>
+       <p><b>Disponibilità :</b> <input type="text" name="disp" id="disp" value=""/></p>
+       <p>
+           <input type="submit" value="Go" id="submit" name="submit">
+       </p> 
+       <script type="text/javascript">
+            update();
+        </script>
+    -->
+    </form>
+  </body>
+</html>
